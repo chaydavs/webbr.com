@@ -7,25 +7,16 @@
     <title>Instant Website Quote</title>
     <style>
         :root {
-            --bg: #F0F2F5;
-            /* Primary */
-            --card: #E6E6FA;
-            /* Secondary */
-            --heading: #4B0082;
-            /* Text - Dark Purple */
-            --subheading: #4B0082;
-            /* Text - Dark Purple */
-            --text: #4B0082;
-            /* Text - Dark Purple */
-            --muted: #6A0DAD;
-            /* Accent - Vibrant Purple */
-            --button: #6A0DAD;
-            /* Accent - Vibrant Purple */
-            --button-hover: #4B0082;
-            /* Text - Dark Purple */
+            --bg: #FFFBDE;
+            --card: #fff;
+            --heading: #4682A9;
+            --subheading: #749BC2;
+            --text: #4682A9;
+            --muted: #91C8E4;
+            --button: #749BC2;
+            --button-hover: #4682A9;
             --button-text: #fff;
-            --border: #E6E6FA;
-            /* Secondary */
+            --border: #91C8E4;
         }
 
         html,
@@ -391,6 +382,37 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label>2b. Add-on Services <span
+                            style="font-weight:400; color:var(--muted); font-size:0.95em;">(optional)</span></label>
+                    <div class="checkbox-group" id="addon-services">
+                        <label><input type="checkbox" name="addons" value="400"> SEO Optimization <span
+                                class="info-icon" data-info="seo">&#9432;</span></label>
+                        <label><input type="checkbox" name="addons" value="600"> Blog/CMS <span class="info-icon"
+                                data-info="blog">&#9432;</span></label>
+                        <label><input type="checkbox" name="addons" value="250"> Social Media Integration <span
+                                class="info-icon" data-info="social">&#9432;</span></label>
+                        <label><input type="checkbox" name="addons" value="300"> Newsletter/Email Marketing Integration
+                            <span class="info-icon" data-info="newsletter">&#9432;</span></label>
+                        <label><input type="checkbox" name="addons" value="200"> Custom Contact Forms <span
+                                class="info-icon" data-info="contactform">&#9432;</span></label>
+                        <label><input type="checkbox" name="addons" value="150"> Analytics Setup <span class="info-icon"
+                                data-info="analytics">&#9432;</span></label>
+                        <label><input type="checkbox" name="addons" value="500"> Multi-language Support <span
+                                class="info-icon" data-info="multilang">&#9432;</span></label>
+                        <label><input type="checkbox" name="addons" value="350"> Accessibility Improvements <span
+                                class="info-icon" data-info="accessibility">&#9432;</span></label>
+                        <label><input type="checkbox" name="addons" value="300"> Performance Optimization <span
+                                class="info-icon" data-info="performance">&#9432;</span></label>
+                        <label><input type="checkbox" name="addons" value="150"> Logo/Branding Design <span
+                                class="info-icon" data-info="logo">&#9432;</span></label>
+                        <label><input type="checkbox" name="addons" value="100"> Copywriting (per page) <span
+                                class="info-icon" data-info="copywriting">&#9432;</span></label>
+                    </div>
+                </div>
+                <div id="addon-info-box"
+                    style="display:none; background:#fff; color:var(--text); border:1.5px solid var(--border); border-radius:0.5rem; padding:0.8rem 1.1rem; margin-bottom:1rem; font-size:0.98em; max-width:420px; position:relative; z-index:10;">
+                </div>
+                <div class="form-group">
                     <label for="hours">3. Monthly Management</label>
                     <div class="slider-group">
                         <input type="range" id="hours" name="hours" min="0" max="20" value="1" step="1">
@@ -436,23 +458,25 @@
                 features.forEach(feature => {
                     oneTimeCost += parseFloat(feature.value);
                 });
+                // Add-on services
+                const addons = document.querySelectorAll('input[name="addons"]:checked');
+                addons.forEach(addon => {
+                    oneTimeCost += parseFloat(addon.value);
+                });
                 const hours = parseFloat(hoursSlider.value);
                 let monthlyCost = hours * monthlyRatePerHour;
                 // --- Rounding logic ---
                 function customRound(val) {
-                    // If ends in .5, round down to nearest 5
                     if (val % 1 === 0.5) {
                         return Math.floor(val / 5) * 5;
                     }
-                    // If ends in 95, round up to 100
                     if (val % 100 >= 95 && val % 100 < 100) {
                         return Math.ceil(val / 100) * 100;
                     }
-                    // Otherwise, round to nearest 10 or 5
                     let rem10 = val % 10;
-                    if (rem10 < 3) return val - rem10; // round down to nearest 10
-                    if (rem10 < 8) return val - rem10 + 5; // round to nearest 5
-                    return val - rem10 + 10; // round up to next 10
+                    if (rem10 < 3) return val - rem10;
+                    if (rem10 < 8) return val - rem10 + 5;
+                    return val - rem10 + 10;
                 }
                 const roundedOneTime = customRound(oneTimeCost);
                 const roundedMonthly = customRound(monthlyCost);
@@ -465,6 +489,7 @@
                 e.preventDefault();
                 const projectType = document.querySelector('input[name="project_type"]:checked').nextElementSibling.textContent;
                 const selectedFeatures = Array.from(document.querySelectorAll('input[name="features"]:checked')).map(el => `   - ${el.parentElement.textContent.replace(el.value, '').trim()}`).join('\n');
+                const selectedAddons = Array.from(document.querySelectorAll('input[name="addons"]:checked')).map(el => `   - ${el.parentElement.textContent.replace(el.value, '').trim()}`).join('\n');
                 const monthlyHours = hoursSlider.value;
                 const finalOneTimeCost = oneTimeCostEl.textContent;
                 const finalMonthlyCost = monthlyCostEl.textContent;
@@ -475,6 +500,7 @@
                 body += `--------------------------------\n`;
                 body += `Project Foundation: ${projectType}\n`;
                 body += `\nSelected Features:\n${selectedFeatures || '   - None'}\n`;
+                body += `\nAdd-on Services:\n${selectedAddons || '   - None'}\n`;
                 body += `\nMonthly Management: ${monthlyHours} hours/month\n`;
                 if (needs) {
                     body += `\nProject Description:\n${needs}\n`;
@@ -495,6 +521,43 @@
             form.addEventListener('change', calculateQuote);
             form.addEventListener('submit', generateAndSendQuote);
             calculateQuote();
+
+            // Info icon logic
+            const addonInfo = {
+                seo: "SEO Optimization: Improve your site's visibility on search engines with on-page and technical SEO best practices.",
+                blog: "Blog/CMS: Add a blog or content management system so you can easily publish and manage articles.",
+                social: "Social Media Integration: Connect your website with social media platforms for sharing and feeds.",
+                newsletter: "Newsletter/Email Marketing: Integrate signup forms and connect to email marketing tools.",
+                contactform: "Custom Contact Forms: Tailored forms for inquiries, bookings, or feedback.",
+                analytics: "Analytics Setup: Google Analytics or similar setup to track visitors and site performance.",
+                multilang: "Multi-language Support: Offer your site in multiple languages for a global audience.",
+                accessibility: "Accessibility: Make your site usable for everyone, including those with disabilities.",
+                performance: "Performance Optimization: Faster load times and better user experience.",
+                logo: "Logo/Branding Design: Custom logo and branding assets for your business.",
+                copywriting: "Copywriting: Professionally written content for your pages (price per page)."
+            };
+            const infoIcons = document.querySelectorAll('.info-icon');
+            const infoBox = document.getElementById('addon-info-box');
+            infoIcons.forEach(icon => {
+                icon.addEventListener('click', function (e) {
+                    const key = this.getAttribute('data-info');
+                    if (infoBox.style.display === 'block' && infoBox.getAttribute('data-showing') === key) {
+                        infoBox.style.display = 'none';
+                        infoBox.removeAttribute('data-showing');
+                    } else {
+                        infoBox.textContent = addonInfo[key];
+                        infoBox.style.display = 'block';
+                        infoBox.setAttribute('data-showing', key);
+                        // Scroll into view if needed
+                        infoBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    e.stopPropagation();
+                });
+            });
+            document.addEventListener('click', function () {
+                infoBox.style.display = 'none';
+                infoBox.removeAttribute('data-showing');
+            });
         });
     </script>
 </body>
