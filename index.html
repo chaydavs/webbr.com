@@ -24,23 +24,28 @@
             display: inline-block;
         }
 
+        .tooltip svg {
+            cursor: pointer;
+        }
+
         .tooltip .tooltip-text {
             visibility: hidden;
-            width: 220px;
+            width: 240px;
             background-color: #333;
             color: #fff;
             text-align: left;
             border-radius: 6px;
-            padding: 10px;
+            padding: 12px;
             position: absolute;
             z-index: 10;
             bottom: 125%;
             left: 50%;
-            margin-left: -110px;
+            margin-left: -120px;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s, visibility 0.3s;
             font-size: 0.8rem;
             line-height: 1.4;
+            border: 1px solid #555;
         }
 
         .tooltip .tooltip-text::after {
@@ -54,7 +59,8 @@
             border-color: #333 transparent transparent transparent;
         }
 
-        .tooltip:hover .tooltip-text {
+        /* Show tooltip on click by adding .active class */
+        .tooltip.active .tooltip-text {
             visibility: visible;
             opacity: 1;
         }
@@ -128,6 +134,12 @@
                             <h3 class="text-lg font-bold">Custom Design & Build</h3>
                             <p class="text-gray-400 mt-1 text-sm">Unique, tailored, and scalable.</p>
                         </label>
+                        <label
+                            class="block p-4 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer has-[:checked]:border-white has-[:checked]:bg-gray-700/50 transition-all">
+                            <input type="radio" name="foundation" value="existing" class="sr-only" data-price="0">
+                            <h3 class="text-lg font-bold">Existing Site</h3>
+                            <p class="text-gray-400 mt-1 text-sm">For add-ons or management services only.</p>
+                        </label>
                     </div>
                 </section>
 
@@ -153,7 +165,7 @@
                             class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
                             <input type="checkbox" name="advanced" value="animations"
                                 class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white"
-                                data-price="850">
+                                data-price="500">
                             <span class="ml-3">Advanced Animations & UX</span>
                         </label>
                     </div>
@@ -217,6 +229,12 @@
         </form>
     </div>
 
+    <footer class="text-center py-6">
+        <p class="text-gray-400">Contact: <a href="mailto:webdevbysai@gmail.com"
+                class="hover:text-white">webdevbysai@gmail.com</a> | <a href="tel:+15716809860"
+                class="hover:text-white">+1 571-680-9860</a></p>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- DATA ---
@@ -253,15 +271,16 @@
                             <div class="tooltip">
                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                                 <span class="tooltip-text">
-                                    <strong>${service.description}</strong>
-                                    <br><br>
-                                    <span class="text-cyan-300">Brand Benefit:</span> ${service.benefit}
+                                    <span class="font-bold text-lg text-white mb-2 block">${service.name} <span class="text-green-400 ml-2">+$${service.price}</span></span>
+                                    <p class="mb-3">${service.description}</p>
+                                    <p><strong class="text-cyan-300">Brand Benefit:</strong> ${service.benefit}</p>
                                 </span>
                             </div>
                         </label>
                     `;
                 });
                 addOnsContainer.innerHTML = html;
+                addTooltipListeners();
             }
 
             // --- CALCULATIONS ---
@@ -286,6 +305,27 @@
             }
 
             // --- EVENT LISTENERS ---
+            function addTooltipListeners() {
+                const tooltips = document.querySelectorAll('.tooltip');
+                tooltips.forEach(tooltip => {
+                    tooltip.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        const wasActive = tooltip.classList.contains('active');
+                        // Close all tooltips first
+                        tooltips.forEach(t => t.classList.remove('active'));
+                        // If it wasn't active, activate it
+                        if (!wasActive) {
+                            tooltip.classList.add('active');
+                        }
+                    });
+                });
+                // Global listener to close tooltips when clicking outside
+                document.addEventListener('click', () => {
+                    tooltips.forEach(t => t.classList.remove('active'));
+                });
+            }
+
             form.addEventListener('change', calculateQuote);
             hoursSlider.addEventListener('input', calculateQuote);
 
@@ -327,7 +367,7 @@
                 body += `Monthly Retainer: ${monthlyCostEl.textContent}\n\n`;
                 body += "I look forward to discussing this further.\n\nBest regards,";
 
-                window.location.href = `mailto:developer@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                window.location.href = `mailto:webdevbysai@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             });
 
             // --- RUN ON LOAD ---
