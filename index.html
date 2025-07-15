@@ -332,7 +332,7 @@
 
         .feature-addon-row {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             width: 100%;
             justify-content: space-between;
             margin-bottom: 1.2rem;
@@ -341,13 +341,50 @@
         .feature-addon-row .form-group {
             flex: 1 1 0;
             min-width: 0;
-            max-width: 48%;
+            max-width: 50%;
         }
 
         .checkbox-group label {
-            font-size: 0.98rem;
-            padding: 0.5rem 0.7rem;
-            margin-bottom: 0.4rem;
+            font-size: 1.05rem;
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.7rem;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            min-height: 56px;
+        }
+
+        .info-icon {
+            margin-left: 0.5em;
+            cursor: pointer;
+            color: var(--muted);
+            font-size: 1.1em;
+            position: relative;
+            display: inline-block;
+        }
+
+        .info-tooltip {
+            display: none;
+            position: absolute;
+            left: 110%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.7rem 1rem;
+            font-size: 0.98em;
+            min-width: 220px;
+            max-width: 320px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(70, 130, 169, 0.10);
+            white-space: normal;
+        }
+
+        .info-icon:hover .info-tooltip {
+            display: block;
         }
 
         @media (max-width: 900px) {
@@ -418,32 +455,52 @@
                                 style="font-weight:400; color:var(--muted); font-size:0.95em;">(optional)</span></label>
                         <div class="checkbox-group" id="addon-services">
                             <label><input type="checkbox" name="addons" value="400"> SEO Optimization <span
-                                    class="info-icon" data-info="seo">&#9432;</span></label>
-                            <label><input type="checkbox" name="addons" value="600"> Blog/CMS <span class="info-icon"
-                                    data-info="blog">&#9432;</span></label>
+                                    class="info-icon">&#9432;<span class="info-tooltip">SEO Optimization: Improve your
+                                        site's visibility on search engines with on-page and technical SEO best
+                                        practices. This helps your brand get discovered by more potential
+                                        customers.</span></span></label>
+                            <label><input type="checkbox" name="addons" value="600"> Blog/CMS <span
+                                    class="info-icon">&#9432;<span class="info-tooltip">Blog/CMS: Add a blog or content
+                                        management system so you can easily publish and manage articles. Regular content
+                                        elevates your brand as an authority in your field.</span></span></label>
                             <label><input type="checkbox" name="addons" value="250"> Social Media Integration <span
-                                    class="info-icon" data-info="social">&#9432;</span></label>
+                                    class="info-icon">&#9432;<span class="info-tooltip">Social Media Integration:
+                                        Connect your website with social media platforms for sharing and feeds. This
+                                        increases engagement and extends your brand's reach.</span></span></label>
                             <label><input type="checkbox" name="addons" value="300"> Newsletter/Email Marketing
-                                Integration <span class="info-icon" data-info="newsletter">&#9432;</span></label>
+                                Integration <span class="info-icon">&#9432;<span class="info-tooltip">Newsletter/Email
+                                        Marketing: Integrate signup forms and connect to email marketing tools. Build a
+                                        loyal audience and keep your brand top-of-mind.</span></span></label>
                             <label><input type="checkbox" name="addons" value="200"> Custom Contact Forms <span
-                                    class="info-icon" data-info="contactform">&#9432;</span></label>
+                                    class="info-icon">&#9432;<span class="info-tooltip">Custom Contact Forms: Tailored
+                                        forms for inquiries, bookings, or feedback. Make it easy for clients to reach
+                                        you and boost your brand's professionalism.</span></span></label>
                             <label><input type="checkbox" name="addons" value="150"> Analytics Setup <span
-                                    class="info-icon" data-info="analytics">&#9432;</span></label>
+                                    class="info-icon">&#9432;<span class="info-tooltip">Analytics Setup: Google
+                                        Analytics or similar setup to track visitors and site performance. Data-driven
+                                        insights help you grow your brand strategically.</span></span></label>
                             <label><input type="checkbox" name="addons" value="500"> Multi-language Support <span
-                                    class="info-icon" data-info="multilang">&#9432;</span></label>
+                                    class="info-icon">&#9432;<span class="info-tooltip">Multi-language Support: Offer
+                                        your site in multiple languages for a global audience. This expands your brand's
+                                        accessibility and appeal.</span></span></label>
                             <label><input type="checkbox" name="addons" value="350"> Accessibility Improvements <span
-                                    class="info-icon" data-info="accessibility">&#9432;</span></label>
+                                    class="info-icon">&#9432;<span class="info-tooltip">Accessibility: Make your site
+                                        usable for everyone, including those with disabilities. An inclusive brand is a
+                                        stronger brand.</span></span></label>
                             <label><input type="checkbox" name="addons" value="300"> Performance Optimization <span
-                                    class="info-icon" data-info="performance">&#9432;</span></label>
+                                    class="info-icon">&#9432;<span class="info-tooltip">Performance Optimization: Faster
+                                        load times and better user experience. A fast site keeps visitors engaged and
+                                        reflects well on your brand.</span></span></label>
                             <label><input type="checkbox" name="addons" value="150"> Logo/Branding Design <span
-                                    class="info-icon" data-info="logo">&#9432;</span></label>
+                                    class="info-icon">&#9432;<span class="info-tooltip">Logo/Branding Design: Custom
+                                        logo and branding assets for your business. Stand out and make your brand
+                                        memorable.</span></span></label>
                             <label><input type="checkbox" name="addons" value="100"> Copywriting (per page) <span
-                                    class="info-icon" data-info="copywriting">&#9432;</span></label>
+                                    class="info-icon">&#9432;<span class="info-tooltip">Copywriting: Professionally
+                                        written content for your pages (price per page). Great copy elevates your
+                                        brand's voice and message.</span></span></label>
                         </div>
                     </div>
-                </div>
-                <div id="addon-info-box"
-                    style="display:none; background:#fff; color:var(--text); border:1.5px solid var(--border); border-radius:0.5rem; padding:0.8rem 1.1rem; margin-bottom:1rem; font-size:0.98em; max-width:420px; position:relative; z-index:10;">
                 </div>
                 <div class="form-group">
                     <label for="hours">3. Monthly Management</label>
@@ -554,43 +611,6 @@
             form.addEventListener('change', calculateQuote);
             form.addEventListener('submit', generateAndSendQuote);
             calculateQuote();
-
-            // Info icon logic
-            const addonInfo = {
-                seo: "SEO Optimization: Improve your site's visibility on search engines with on-page and technical SEO best practices.",
-                blog: "Blog/CMS: Add a blog or content management system so you can easily publish and manage articles.",
-                social: "Social Media Integration: Connect your website with social media platforms for sharing and feeds.",
-                newsletter: "Newsletter/Email Marketing: Integrate signup forms and connect to email marketing tools.",
-                contactform: "Custom Contact Forms: Tailored forms for inquiries, bookings, or feedback.",
-                analytics: "Analytics Setup: Google Analytics or similar setup to track visitors and site performance.",
-                multilang: "Multi-language Support: Offer your site in multiple languages for a global audience.",
-                accessibility: "Accessibility: Make your site usable for everyone, including those with disabilities.",
-                performance: "Performance Optimization: Faster load times and better user experience.",
-                logo: "Logo/Branding Design: Custom logo and branding assets for your business.",
-                copywriting: "Copywriting: Professionally written content for your pages (price per page)."
-            };
-            const infoIcons = document.querySelectorAll('.info-icon');
-            const infoBox = document.getElementById('addon-info-box');
-            infoIcons.forEach(icon => {
-                icon.addEventListener('click', function (e) {
-                    const key = this.getAttribute('data-info');
-                    if (infoBox.style.display === 'block' && infoBox.getAttribute('data-showing') === key) {
-                        infoBox.style.display = 'none';
-                        infoBox.removeAttribute('data-showing');
-                    } else {
-                        infoBox.textContent = addonInfo[key];
-                        infoBox.style.display = 'block';
-                        infoBox.setAttribute('data-showing', key);
-                        // Scroll into view if needed
-                        infoBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                    e.stopPropagation();
-                });
-            });
-            document.addEventListener('click', function () {
-                infoBox.style.display = 'none';
-                infoBox.removeAttribute('data-showing');
-            });
         });
     </script>
 </body>
