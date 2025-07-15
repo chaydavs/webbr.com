@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,21 +12,17 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-
         .gradient-bg {
             background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
         }
-
         /* Custom tooltip styles */
         .tooltip {
             position: relative;
             display: inline-block;
         }
-
         .tooltip svg {
             cursor: pointer;
         }
-
         .tooltip .tooltip-text {
             visibility: hidden;
             width: 240px;
@@ -47,7 +42,6 @@
             line-height: 1.4;
             border: 1px solid #555;
         }
-
         .tooltip .tooltip-text::after {
             content: "";
             position: absolute;
@@ -58,13 +52,11 @@
             border-style: solid;
             border-color: #333 transparent transparent transparent;
         }
-
         /* Show tooltip on click by adding .active class */
         .tooltip.active .tooltip-text {
             visibility: visible;
             opacity: 1;
         }
-
         /* Custom slider styles */
         input[type=range] {
             -webkit-appearance: none;
@@ -77,11 +69,9 @@
             transition: opacity .2s;
             border-radius: 9999px;
         }
-
         input[type=range]:hover {
             opacity: 1;
         }
-
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -92,7 +82,6 @@
             border-radius: 50%;
             border: 2px solid #1a1a1a;
         }
-
         input[type=range]::-moz-range-thumb {
             width: 24px;
             height: 24px;
@@ -103,11 +92,10 @@
         }
     </style>
 </head>
-
 <body class="gradient-bg text-white antialiased">
 
     <div class="container mx-auto p-4 sm:p-6 max-w-7xl">
-
+        
         <header class="text-center mb-8">
             <h1 class="text-4xl font-bold tracking-tight">Website Quote Calculator</h1>
             <p class="text-gray-400 mt-1">Select your options for an instant estimate.</p>
@@ -121,21 +109,17 @@
                 <section>
                     <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">1. Foundation</h2>
                     <div class="space-y-4">
-                        <label
-                            class="block p-4 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer has-[:checked]:border-white has-[:checked]:bg-gray-700/50 transition-all">
-                            <input type="radio" name="foundation" value="template" class="sr-only" data-price="600"
-                                checked>
+                        <label class="block p-4 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer has-[:checked]:border-white has-[:checked]:bg-gray-700/50 transition-all">
+                            <input type="radio" name="foundation" value="template" class="sr-only" data-price="600" checked>
                             <h3 class="text-lg font-bold">Template-Based Site</h3>
                             <p class="text-gray-400 mt-1 text-sm">Fast, affordable, and simple.</p>
                         </label>
-                        <label
-                            class="block p-4 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer has-[:checked]:border-white has-[:checked]:bg-gray-700/50 transition-all">
+                        <label class="block p-4 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer has-[:checked]:border-white has-[:checked]:bg-gray-700/50 transition-all">
                             <input type="radio" name="foundation" value="custom" class="sr-only" data-price="1250">
                             <h3 class="text-lg font-bold">Custom Design & Build</h3>
                             <p class="text-gray-400 mt-1 text-sm">Unique, tailored, and scalable.</p>
                         </label>
-                        <label
-                            class="block p-4 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer has-[:checked]:border-white has-[:checked]:bg-gray-700/50 transition-all">
+                        <label class="block p-4 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer has-[:checked]:border-white has-[:checked]:bg-gray-700/50 transition-all">
                             <input type="radio" name="foundation" value="existing" class="sr-only" data-price="0">
                             <h3 class="text-lg font-bold">Existing Site</h3>
                             <p class="text-gray-400 mt-1 text-sm">For add-ons or management services only.</p>
@@ -147,25 +131,16 @@
                 <section>
                     <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">2. Advanced Features</h2>
                     <div class="space-y-3">
-                        <label
-                            class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
-                            <input type="checkbox" name="advanced" value="ecommerce"
-                                class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white"
-                                data-price="800">
+                        <label class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
+                            <input type="checkbox" name="advanced" value="ecommerce" class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white" data-price="800">
                             <span class="ml-3">E-commerce Functionality</span>
                         </label>
-                        <label
-                            class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
-                            <input type="checkbox" name="advanced" value="database"
-                                class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white"
-                                data-price="850">
+                        <label class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
+                            <input type="checkbox" name="advanced" value="database" class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white" data-price="850">
                             <span class="ml-3">Database & User Logins</span>
                         </label>
-                        <label
-                            class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
-                            <input type="checkbox" name="advanced" value="animations"
-                                class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white"
-                                data-price="500">
+                        <label class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
+                            <input type="checkbox" name="advanced" value="animations" class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white" data-price="500">
                             <span class="ml-3">Advanced Animations & UX</span>
                         </label>
                     </div>
@@ -174,8 +149,7 @@
 
             <!-- === SECTION 2: ADD-ONS === -->
             <div class="bg-gray-800/30 p-5 rounded-lg flex flex-col">
-                <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2 flex-shrink-0">3. Add-on Services
-                </h2>
+                <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2 flex-shrink-0">3. Add-on Services</h2>
                 <div id="add-ons-container" class="space-y-3">
                     <!-- Add-on Items will be injected here by JS -->
                 </div>
@@ -191,8 +165,7 @@
                             <label for="management-hours" class="text-lg">Monthly Hours</label>
                             <span id="hours-value" class="text-xl font-bold text-white">0 hrs</span>
                         </div>
-                        <input type="range" id="management-hours" min="0" max="20" value="0" step="1"
-                            data-price-per-hour="35">
+                        <input type="range" id="management-hours" min="0" max="20" value="0" step="1" data-price-per-hour="35">
                         <p class="text-sm text-gray-400 mt-3">Billed at $35/hour.</p>
                     </div>
                 </section>
@@ -200,11 +173,9 @@
                 <!-- 5. Project Description -->
                 <section>
                     <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">5. Project Details</h2>
-                    <textarea id="project-description" rows="4"
-                        class="w-full p-3 bg-gray-800/50 rounded-lg border border-gray-700 focus:ring-white focus:border-white transition-colors"
-                        placeholder="Describe your needs, goals, or requirements..."></textarea>
+                    <textarea id="project-description" rows="4" class="w-full p-3 bg-gray-800/50 rounded-lg border border-gray-700 focus:ring-white focus:border-white transition-colors" placeholder="Describe your needs, goals, or requirements..."></textarea>
                 </section>
-
+                
                 <!-- 6. Instant Quote Calculation & Submit -->
                 <div class="mt-auto flex-shrink-0 pt-6">
                     <div class="bg-white text-black p-4 rounded-lg shadow-2xl shadow-white/10">
@@ -219,8 +190,7 @@
                                 <p id="monthly-cost" class="text-3xl font-bold">$0</p>
                             </div>
                         </div>
-                        <button type="button" id="submit-quote"
-                            class="w-full bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition-colors text-lg">
+                        <button type="button" id="submit-quote" class="w-full bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition-colors text-lg">
                             Send This Quote
                         </button>
                     </div>
@@ -230,9 +200,7 @@
     </div>
 
     <footer class="text-center py-6">
-        <p class="text-gray-400">Contact: <a href="mailto:webdevbysai@gmail.com"
-                class="hover:text-white">webdevbysai@gmail.com</a> | <a href="tel:+15716809860"
-                class="hover:text-white">+1 571-680-9860</a></p>
+        <p class="text-gray-400">Contact: <a href="mailto:webdevbysai@gmail.com" class="hover:text-white">webdevbysai@gmail.com</a> | <a href="tel:+15716809860" class="hover:text-white">+1 571-680-9860</a></p>
     </footer>
 
     <script>
@@ -330,42 +298,51 @@
             hoursSlider.addEventListener('input', calculateQuote);
 
             submitButton.addEventListener('click', () => {
-                const subject = "Website Project Quote Inquiry";
-                let body = "Hello,\n\nI've used the quote calculator and I'm interested in the following setup:\n\n";
+                const subject = "Website Project Inquiry & Quote";
+                let body = "Hello,\n\nI've used your quote calculator and I'm interested in moving forward. Here is a summary of my selections:\n\n";
 
+                let projectSelections = [];
+
+                // Foundation
                 const foundation = form.querySelector('input[name="foundation"]:checked');
-                body += `--- WEBSITE FOUNDATION ---\n- ${foundation.nextElementSibling.textContent}: $${Number(foundation.dataset.price).toLocaleString()}\n\n`;
+                projectSelections.push(`• Foundation: ${foundation.nextElementSibling.textContent} - $${Number(foundation.dataset.price).toLocaleString()}`);
 
+                // Advanced Features
                 const advancedFeatures = form.querySelectorAll('input[name="advanced"]:checked');
                 if (advancedFeatures.length > 0) {
-                    body += "--- ADVANCED FEATURES ---\n";
                     advancedFeatures.forEach(feature => {
-                        body += `- ${feature.nextElementSibling.textContent.trim()}: $${Number(feature.dataset.price).toLocaleString()}\n`;
+                        projectSelections.push(`• ${feature.nextElementSibling.textContent.trim()} - $${Number(feature.dataset.price).toLocaleString()}`);
                     });
-                    body += "\n";
                 }
 
+                // Add-on Services
                 const addOns = form.querySelectorAll('input[name="addon"]:checked');
                 if (addOns.length > 0) {
-                    body += "--- ADD-ON SERVICES ---\n";
                     addOns.forEach(addOn => {
-                        body += `- ${addOn.nextElementSibling.textContent.trim()}: $${Number(addOn.dataset.price).toLocaleString()}\n`;
+                        projectSelections.push(`• ${addOn.nextElementSibling.textContent.trim()} - $${Number(addOn.dataset.price).toLocaleString()}`);
                     });
-                    body += "\n";
+                }
+                
+                body += "PROJECT SCOPE:\n" + projectSelections.join('\n') + '\n\n';
+
+                // Monthly Management
+                const hours = hoursSlider.value;
+                if (hours > 0) {
+                    body += `ONGOING SUPPORT:\n• Monthly Management: ${hours} hours @ $${Number(hoursSlider.dataset.pricePerHour)}/hr\n\n`;
                 }
 
-                const hours = hoursSlider.value;
-                body += `--- ONGOING MANAGEMENT ---\n- Monthly Hours: ${hours} ($${Number(hoursSlider.dataset.pricePerHour)}/hr)\n\n`;
-
+                // Project Description
                 const description = document.getElementById('project-description').value;
                 if (description) {
-                    body += `--- PROJECT DETAILS ---\n${description}\n\n`;
+                    body += `PROJECT DETAILS:\n${description}\n\n`;
                 }
 
-                body += "--- QUOTE SUMMARY ---\n";
-                body += `One-Time Project Cost: ${oneTimeCostEl.textContent}\n`;
-                body += `Monthly Retainer: ${monthlyCostEl.textContent}\n\n`;
-                body += "I look forward to discussing this further.\n\nBest regards,";
+                // Totals
+                body += "ESTIMATED TOTALS:\n";
+                body += `• One-Time Project Cost: ${oneTimeCostEl.textContent}\n`;
+                body += `• Monthly Retainer: ${monthlyCostEl.textContent}\n\n`;
+
+                body += "Please let me know the next steps.\n\nThank you,\n\n[Your Name]";
 
                 window.location.href = `mailto:webdevbysai@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             });
@@ -377,5 +354,4 @@
     </script>
 
 </body>
-
 </html>
