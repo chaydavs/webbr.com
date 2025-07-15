@@ -4,615 +4,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instant Website Quote</title>
+    <title>Interactive Quote Calculator - Single View</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #FFFBDE;
-            --card: #fff;
-            --heading: #4682A9;
-            --subheading: #749BC2;
-            --text: #4682A9;
-            --muted: #91C8E4;
-            --button: #749BC2;
-            --button-hover: #4682A9;
-            --button-text: #fff;
-            --border: #91C8E4;
-        }
-
-        html,
         body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif;
         }
 
-        body {
-            min-height: 100vh;
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-            display: flex;
-            align-items: stretch;
-            justify-content: stretch;
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
         }
 
-        .container {
-            display: flex;
-            gap: 4rem;
-            width: 100vw;
-            max-width: 1600px;
-            min-height: 100vh;
-            background: none;
-            padding: 4rem 4vw;
-            box-sizing: border-box;
-        }
-
-        .info-section {
-            flex: 1.1;
-            background: none;
-            padding: 2.5rem 2rem 2.5rem 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            min-width: 340px;
-            max-width: 600px;
-        }
-
-        .info-section h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            margin: 0 0 0.5rem 0;
-            color: var(--heading);
-            line-height: 1.1;
-        }
-
-        .info-section .tagline {
-            font-size: 1.3rem;
-            color: var(--muted);
-            margin-bottom: 2.5rem;
-        }
-
-        .info-section .promise {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: var(--button-hover);
-            margin-bottom: 2.5rem;
-            letter-spacing: -1px;
-        }
-
-        .info-section .promise span {
-            color: var(--button);
-            font-size: 2.5rem;
-        }
-
-        .info-section .contact {
-            margin-top: auto;
-        }
-
-        .info-section .contact-label {
-            font-size: 1.1rem;
-            color: var(--muted);
-            margin-bottom: 0.2rem;
-        }
-
-        .info-section .contact-link {
-            color: var(--button);
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 0.7rem;
-            transition: color 0.2s;
-            word-break: break-all;
-        }
-
-        .info-section .contact-link:hover {
-            color: var(--button-hover);
-        }
-
-        .form-section {
-            flex: 1.7;
-            background: var(--card);
-            border-radius: 1.25rem;
-            border: 1px solid var(--border);
-            padding: 2rem 2.5rem 1.5rem 2.5rem;
-            min-width: 350px;
-            max-width: 700px;
-            box-shadow: 0 2px 8px rgba(30, 41, 59, 0.04);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .form-section>* {
-            width: 100%;
-            max-width: 420px;
-            margin-left: auto;
-            margin-right: auto;
-            box-sizing: border-box;
-        }
-
-        .radio-group,
-        .checkbox-group,
-        .slider-group,
-        textarea,
-        .quote-box,
-        .submit-btn {
-            width: 100%;
-            max-width: 420px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.1rem;
-        }
-
-        .submit-btn {
-            display: block;
-            margin-top: 1.2rem;
-        }
-
-        label {
-            font-weight: 600;
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-            color: var(--subheading);
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 1rem;
-            width: 100%;
-        }
-
-        .radio-group label {
-            flex: 1;
-            text-align: center;
-            padding: 0.7rem 0.3rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            background: #E6E6FA;
-            color: var(--subheading);
-            border: 2px solid transparent;
-            transition: all 0.2s;
-            font-weight: 500;
-            font-size: 1rem;
-        }
-
-        .radio-group input[type="radio"] {
-            display: none;
-        }
-
-        .radio-group input[type="radio"]:checked+label {
-            background: var(--button);
-            color: var(--button-text);
-            border: 2px solid var(--button-hover);
-            font-weight: 700;
-        }
-
-        .checkbox-group {
-            width: 100%;
-        }
-
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            background: #E6E6FA;
-            padding: 0.7rem 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            border: 1.5px solid #E6E6FA;
-            font-weight: 500;
-            color: var(--subheading);
-            font-size: 1rem;
-            width: 100%;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            accent-color: var(--button);
-            width: 1.2em;
-            height: 1.2em;
-        }
-
-        .slider-group {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            width: 100%;
-        }
-
-        input[type="range"] {
-            flex: 1;
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 8px;
-            background: #E6E6FA;
-            border-radius: 5px;
-            outline: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            background: var(--button);
-            cursor: pointer;
-            border-radius: 50%;
-            border: 2px solid var(--button-hover);
-        }
-
-        #hours-value {
-            font-weight: bold;
-            font-size: 1rem;
-            color: var(--button);
-            min-width: 60px;
-            text-align: center;
-            background: #E6E6FA;
-            padding: 0.3rem 0.7rem;
-            border-radius: 0.4rem;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 60px;
-            border-radius: 0.5rem;
-            border: 1.5px solid var(--border);
-            padding: 0.7rem 1rem;
-            font-size: 1rem;
-            font-family: inherit;
-            color: var(--subheading);
-            background: #F0F2F5;
-            resize: vertical;
-            margin-top: 0.2rem;
-        }
-
-        .quote-box {
-            background: #E6E6FA;
-            padding: 0.9rem 1.1rem;
-            border-radius: 0.5rem;
-            border: 1.5px solid var(--border);
-            margin: 1.2rem 0 1.2rem 0;
-            font-size: 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            box-sizing: border-box;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(106, 13, 173, 0.07);
-        }
-
-        .quote-box .price-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 0.5rem;
-        }
-
-        .quote-box .price-label {
-            font-weight: 500;
-            color: var(--muted);
-            margin-bottom: 0.1rem;
-            font-size: 0.98em;
-        }
-
-        .quote-box .price-display {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--button);
-            margin: 0 0 0.3rem 0;
-            text-align: left;
-        }
-
-        .submit-btn {
-            background: var(--button);
-            color: var(--button-text);
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            padding: 0.8rem 1.2rem;
-            border-radius: 0.6rem;
-            width: 100%;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 0.7rem;
-            box-shadow: none;
-            letter-spacing: 0.5px;
-        }
-
-        .submit-btn:hover {
-            background: var(--button-hover);
-        }
-
-        .feature-addon-row {
-            display: flex;
-            gap: 1rem;
-            width: 100%;
-            justify-content: space-between;
-            margin-bottom: 1.2rem;
-        }
-
-        .feature-addon-row .form-group {
-            flex: 1 1 0;
-            min-width: 0;
-            max-width: 50%;
-        }
-
-        .checkbox-group label {
-            font-size: 1.05rem;
-            padding: 1rem 1.2rem;
-            margin-bottom: 0.7rem;
-            width: 100%;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            min-height: 56px;
-        }
-
-        .info-icon {
-            margin-left: 0.5em;
-            cursor: pointer;
-            color: var(--muted);
-            font-size: 1.1em;
+        /* Custom tooltip styles */
+        .tooltip {
             position: relative;
             display: inline-block;
         }
 
-        .info-tooltip {
-            display: none;
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 220px;
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
             position: absolute;
-            left: 110%;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #fff;
-            color: var(--text);
-            border: 1.5px solid var(--border);
-            border-radius: 0.5rem;
-            padding: 0.7rem 1rem;
-            font-size: 0.98em;
-            min-width: 220px;
-            max-width: 320px;
-            z-index: 100;
-            box-shadow: 0 2px 8px rgba(70, 130, 169, 0.10);
-            white-space: normal;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            line-height: 1.4;
         }
 
-        .info-icon:hover .info-tooltip {
-            display: block;
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
         }
 
-        @media (max-width: 900px) {
-            .feature-addon-row {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .feature-addon-row .form-group {
-                max-width: 100%;
-            }
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
         }
 
-        @media (max-width: 1100px) {
-            .container {
-                flex-direction: column;
-                gap: 2rem;
-                padding: 2rem 0.5rem;
-            }
+        /* Custom slider styles */
+        input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #4a4a4a;
+            outline: none;
+            opacity: 0.9;
+            transition: opacity .2s;
+            border-radius: 9999px;
+        }
 
-            .info-section,
-            .form-section {
-                min-width: 0;
-                width: 100%;
-                max-width: 100vw;
-                padding: 2rem 1rem;
-            }
+        input[type=range]:hover {
+            opacity: 1;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #ffffff;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #1a1a1a;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #ffffff;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #1a1a1a;
         }
     </style>
 </head>
 
-<body>
-    <div class="container">
-        <div class="info-section">
-            <h1>Webbr</h1>
-            <div class="tagline">Get a professional website, fast. Instant quote, transparent pricing, and direct
-                contact with your developer.</div>
-            <div class="promise">Up & Running in <span>48 Hours!</span></div>
-            <div class="contact">
-                <div class="contact-label">Contact</div>
-                <a class="contact-link" href="mailto:webdevbysai@gmail.com">webdevbysai@gmail.com</a>
-                <a class="contact-link" href="tel:5716809860">571-680-9860</a>
+<body class="gradient-bg text-white antialiased">
+
+    <div class="container mx-auto p-4 sm:p-6 max-w-7xl">
+
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold tracking-tight">Website Quote Calculator</h1>
+            <p class="text-gray-400 mt-1">Select your options for an instant estimate.</p>
+        </header>
+
+        <form id="quote-form" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- === SECTION 1: CORE CHOICES === -->
+            <div class="bg-gray-800/30 p-5 rounded-lg flex flex-col space-y-8">
+                <!-- 1. Website Foundation Selection -->
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">1. Foundation</h2>
+                    <div class="space-y-4">
+                        <label
+                            class="block p-4 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer has-[:checked]:border-white has-[:checked]:bg-gray-700/50 transition-all">
+                            <input type="radio" name="foundation" value="template" class="sr-only" data-price="400"
+                                checked>
+                            <h3 class="text-lg font-bold">Template-Based Site</h3>
+                            <p class="text-gray-400 mt-1 text-sm">Fast, affordable, and simple.</p>
+                        </label>
+                        <label
+                            class="block p-4 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer has-[:checked]:border-white has-[:checked]:bg-gray-700/50 transition-all">
+                            <input type="radio" name="foundation" value="custom" class="sr-only" data-price="1500">
+                            <h3 class="text-lg font-bold">Custom Design & Build</h3>
+                            <p class="text-gray-400 mt-1 text-sm">Unique, tailored, and scalable.</p>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- 2. Advanced Features (One-Time) -->
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">2. Advanced Features</h2>
+                    <div class="space-y-3">
+                        <label
+                            class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
+                            <input type="checkbox" name="advanced" value="ecommerce"
+                                class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white"
+                                data-price="750">
+                            <span class="ml-3">E-commerce Functionality</span>
+                        </label>
+                        <label
+                            class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
+                            <input type="checkbox" name="advanced" value="database"
+                                class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white"
+                                data-price="1000">
+                            <span class="ml-3">Database & User Logins</span>
+                        </label>
+                        <label
+                            class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
+                            <input type="checkbox" name="advanced" value="animations"
+                                class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white"
+                                data-price="375">
+                            <span class="ml-3">Advanced Animations & UX</span>
+                        </label>
+                    </div>
+                </section>
             </div>
-        </div>
-        <div class="form-section">
-            <h2>Get Your Instant Quote</h2>
-            <form id="quote-form" autocomplete="off">
-                <div class="form-group">
-                    <label for="project-type">1. Website Foundation</label>
-                    <div class="radio-group" id="project-type">
-                        <input type="radio" id="template" name="project_type" value="750" checked>
-                        <label for="template">Template-Based Site</label>
-                        <input type="radio" id="custom" name="project_type" value="2250">
-                        <label for="custom">Custom Design & Build</label>
-                    </div>
+
+            <!-- === SECTION 2: ADD-ONS === -->
+            <div class="bg-gray-800/30 p-5 rounded-lg flex flex-col">
+                <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2 flex-shrink-0">3. Add-on Services
+                </h2>
+                <div id="add-ons-container" class="space-y-3">
+                    <!-- Add-on Items will be injected here by JS -->
                 </div>
-                <div class="feature-addon-row">
-                    <div class="form-group">
-                        <label>2. Advanced Features (One-Time)</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="features" value="1250"> E-commerce Functionality</label>
-                            <label><input type="checkbox" name="features" value="1000"> Database & User Logins</label>
-                            <label><input type="checkbox" name="features" value="375"> Advanced Animations & UX</label>
+            </div>
+
+            <!-- === SECTION 3: MANAGEMENT & TOTALS === -->
+            <div class="bg-gray-800/30 p-5 rounded-lg flex flex-col space-y-8">
+                <!-- 4. Monthly Management -->
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">4. Ongoing Management</h2>
+                    <div class="p-4 bg-gray-800/50 rounded-lg border border-gray-700">
+                        <div class="flex justify-between items-center mb-2">
+                            <label for="management-hours" class="text-lg">Monthly Hours</label>
+                            <span id="hours-value" class="text-xl font-bold text-white">0 hrs</span>
                         </div>
+                        <input type="range" id="management-hours" min="0" max="20" value="0" step="1"
+                            data-price-per-hour="35">
+                        <p class="text-sm text-gray-400 mt-3">Billed at $35/hour.</p>
                     </div>
-                    <div class="form-group">
-                        <label>2b. Add-on Services <span
-                                style="font-weight:400; color:var(--muted); font-size:0.95em;">(optional)</span></label>
-                        <div class="checkbox-group" id="addon-services">
-                            <label><input type="checkbox" name="addons" value="400"> SEO Optimization <span
-                                    class="info-icon">&#9432;<span class="info-tooltip">SEO Optimization: Improve your
-                                        site's visibility on search engines with on-page and technical SEO best
-                                        practices. This helps your brand get discovered by more potential
-                                        customers.</span></span></label>
-                            <label><input type="checkbox" name="addons" value="600"> Blog/CMS <span
-                                    class="info-icon">&#9432;<span class="info-tooltip">Blog/CMS: Add a blog or content
-                                        management system so you can easily publish and manage articles. Regular content
-                                        elevates your brand as an authority in your field.</span></span></label>
-                            <label><input type="checkbox" name="addons" value="250"> Social Media Integration <span
-                                    class="info-icon">&#9432;<span class="info-tooltip">Social Media Integration:
-                                        Connect your website with social media platforms for sharing and feeds. This
-                                        increases engagement and extends your brand's reach.</span></span></label>
-                            <label><input type="checkbox" name="addons" value="300"> Newsletter/Email Marketing
-                                Integration <span class="info-icon">&#9432;<span class="info-tooltip">Newsletter/Email
-                                        Marketing: Integrate signup forms and connect to email marketing tools. Build a
-                                        loyal audience and keep your brand top-of-mind.</span></span></label>
-                            <label><input type="checkbox" name="addons" value="200"> Custom Contact Forms <span
-                                    class="info-icon">&#9432;<span class="info-tooltip">Custom Contact Forms: Tailored
-                                        forms for inquiries, bookings, or feedback. Make it easy for clients to reach
-                                        you and boost your brand's professionalism.</span></span></label>
-                            <label><input type="checkbox" name="addons" value="150"> Analytics Setup <span
-                                    class="info-icon">&#9432;<span class="info-tooltip">Analytics Setup: Google
-                                        Analytics or similar setup to track visitors and site performance. Data-driven
-                                        insights help you grow your brand strategically.</span></span></label>
-                            <label><input type="checkbox" name="addons" value="500"> Multi-language Support <span
-                                    class="info-icon">&#9432;<span class="info-tooltip">Multi-language Support: Offer
-                                        your site in multiple languages for a global audience. This expands your brand's
-                                        accessibility and appeal.</span></span></label>
-                            <label><input type="checkbox" name="addons" value="350"> Accessibility Improvements <span
-                                    class="info-icon">&#9432;<span class="info-tooltip">Accessibility: Make your site
-                                        usable for everyone, including those with disabilities. An inclusive brand is a
-                                        stronger brand.</span></span></label>
-                            <label><input type="checkbox" name="addons" value="300"> Performance Optimization <span
-                                    class="info-icon">&#9432;<span class="info-tooltip">Performance Optimization: Faster
-                                        load times and better user experience. A fast site keeps visitors engaged and
-                                        reflects well on your brand.</span></span></label>
-                            <label><input type="checkbox" name="addons" value="150"> Logo/Branding Design <span
-                                    class="info-icon">&#9432;<span class="info-tooltip">Logo/Branding Design: Custom
-                                        logo and branding assets for your business. Stand out and make your brand
-                                        memorable.</span></span></label>
-                            <label><input type="checkbox" name="addons" value="100"> Copywriting (per page) <span
-                                    class="info-icon">&#9432;<span class="info-tooltip">Copywriting: Professionally
-                                        written content for your pages (price per page). Great copy elevates your
-                                        brand's voice and message.</span></span></label>
+                </section>
+
+                <!-- 5. Project Description -->
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 border-b border-gray-700 pb-2">5. Project Details</h2>
+                    <textarea id="project-description" rows="4"
+                        class="w-full p-3 bg-gray-800/50 rounded-lg border border-gray-700 focus:ring-white focus:border-white transition-colors"
+                        placeholder="Describe your needs, goals, or requirements..."></textarea>
+                </section>
+
+                <!-- 6. Instant Quote Calculation & Submit -->
+                <div class="mt-auto flex-shrink-0 pt-6">
+                    <div class="bg-white text-black p-4 rounded-lg shadow-2xl shadow-white/10">
+                        <div class="flex justify-around items-center gap-4 mb-4">
+                            <div class="text-center">
+                                <h3 class="text-md font-semibold text-gray-600">One-Time Cost</h3>
+                                <p id="one-time-cost" class="text-3xl font-bold">$400</p>
+                            </div>
+                            <div class="w-px h-12 bg-gray-200"></div>
+                            <div class="text-center">
+                                <h3 class="text-md font-semibold text-gray-600">Monthly Retainer</h3>
+                                <p id="monthly-cost" class="text-3xl font-bold">$0</p>
+                            </div>
                         </div>
+                        <button type="button" id="submit-quote"
+                            class="w-full bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition-colors text-lg">
+                            Send This Quote
+                        </button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="hours">3. Monthly Management</label>
-                    <div class="slider-group">
-                        <input type="range" id="hours" name="hours" min="0" max="20" value="1" step="1">
-                        <span id="hours-value">1 hour</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="needs">4. Describe your needs</label>
-                    <textarea id="needs" name="needs"
-                        placeholder="Tell us about your project, goals, or any special requirements..."></textarea>
-                </div>
-                <div class="quote-box">
-                    <div class="price-section">
-                        <div class="price-label">One-Time Project Cost</div>
-                        <div class="price-display" id="one-time-cost">$750</div>
-                    </div>
-                    <div class="price-section">
-                        <div class="price-label">Monthly Retainer</div>
-                        <div class="price-display" id="monthly-cost">$38</div>
-                    </div>
-                </div>
-                <button class="submit-btn" id="submit-button" type="submit">Send This Quote to Developer</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const developerEmail = "hello@webbr.com";
-            const monthlyRatePerHour = 37.5;
+            // --- DATA ---
+            const addOnServices = [
+                { id: 'seo', name: 'SEO Optimization', price: 300, description: 'Improve your visibility on search engines like Google.', benefit: 'Attract more organic traffic and potential customers.' },
+                { id: 'blog', name: 'Blog/CMS', price: 250, description: 'A full-featured blog or content management system to publish articles.', benefit: 'Establish authority and engage your audience with fresh content.' },
+                { id: 'social', name: 'Social Media Integration', price: 125, description: 'Display live feeds from your social media profiles on your site.', benefit: 'Increase social engagement and keep content dynamic.' },
+                { id: 'newsletter', name: 'Newsletter Integration', price: 150, description: 'Integrate with services like Mailchimp for email marketing.', benefit: 'Build and nurture your email list directly from your site.' },
+                { id: 'forms', name: 'Custom Contact Forms', price: 100, description: 'Create advanced forms with file uploads, conditional logic, etc.', benefit: 'Streamline data collection and improve user interaction.' },
+                { id: 'analytics', name: 'Analytics Setup', price: 75, description: 'Install and configure analytics tools like Google Analytics 4.', benefit: 'Gain valuable insights into your website traffic and user behavior.' },
+                { id: 'multilang', name: 'Multi-language Support', price: 450, description: 'Allow users to switch between different languages on your site.', benefit: 'Reach a global audience and cater to international markets.' },
+                { id: 'accessibility', name: 'Accessibility Improvements', price: 350, description: 'Enhance your site to meet WCAG standards for users with disabilities.', benefit: 'Ensure an inclusive experience for all users and avoid legal risks.' },
+                { id: 'logo', name: 'Logo/Branding Design', price: 600, description: 'A complete branding package including a new logo and style guide.', benefit: 'Create a strong, memorable, and professional brand identity.' },
+                { id: 'copywriting', name: 'Copywriting (per page)', price: 125, description: 'Professionally written content for one page of your website.', benefit: 'Communicate your message clearly and persuasively to drive action.' },
+            ];
+
+            // --- ELEMENTS ---
             const form = document.getElementById('quote-form');
             const oneTimeCostEl = document.getElementById('one-time-cost');
             const monthlyCostEl = document.getElementById('monthly-cost');
-            const hoursSlider = document.getElementById('hours');
+            const hoursSlider = document.getElementById('management-hours');
             const hoursValueEl = document.getElementById('hours-value');
-            const submitButton = document.getElementById('submit-button');
+            const submitButton = document.getElementById('submit-quote');
+            const addOnsContainer = document.getElementById('add-ons-container');
+
+            // --- INITIALIZATION ---
+            function populateAddOns() {
+                let html = '';
+                addOnServices.forEach(service => {
+                    html += `
+                        <label class="flex items-center p-3 bg-gray-800/50 rounded-lg border border-gray-700 cursor-pointer hover:border-gray-500 transition-all">
+                            <input type="checkbox" name="addon" value="${service.id}" class="h-5 w-5 rounded bg-gray-700 border-gray-600 text-white focus:ring-white" data-price="${service.price}">
+                            <span class="ml-3 text-sm flex-1">${service.name}</span>
+                            <div class="tooltip">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                                <span class="tooltip-text">
+                                    <strong>${service.description}</strong>
+                                    <br><br>
+                                    <span class="text-cyan-300">Brand Benefit:</span> ${service.benefit}
+                                </span>
+                            </div>
+                        </label>
+                    `;
+                });
+                addOnsContainer.innerHTML = html;
+            }
+
+            // --- CALCULATIONS ---
             function calculateQuote() {
-                let oneTimeCost = 0;
-                const projectType = document.querySelector('input[name="project_type"]:checked');
-                if (projectType) {
-                    oneTimeCost += parseFloat(projectType.value);
-                }
-                const features = document.querySelectorAll('input[name="features"]:checked');
-                features.forEach(feature => {
-                    oneTimeCost += parseFloat(feature.value);
-                });
-                // Add-on services
-                const addons = document.querySelectorAll('input[name="addons"]:checked');
-                addons.forEach(addon => {
-                    oneTimeCost += parseFloat(addon.value);
-                });
-                const hours = parseFloat(hoursSlider.value);
-                let monthlyCost = hours * monthlyRatePerHour;
-                // --- Rounding logic ---
-                function customRound(val) {
-                    if (val % 1 === 0.5) {
-                        return Math.floor(val / 5) * 5;
-                    }
-                    if (val % 100 >= 95 && val % 100 < 100) {
-                        return Math.ceil(val / 100) * 100;
-                    }
-                    let rem10 = val % 10;
-                    if (rem10 < 3) return val - rem10;
-                    if (rem10 < 8) return val - rem10 + 5;
-                    return val - rem10 + 10;
-                }
-                const roundedOneTime = customRound(oneTimeCost);
-                const roundedMonthly = customRound(monthlyCost);
-                const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
-                oneTimeCostEl.textContent = formatter.format(roundedOneTime);
-                monthlyCostEl.textContent = formatter.format(roundedMonthly);
-                hoursValueEl.textContent = `${hours} ${hours === 1 ? 'hour' : 'hours'}`;
+                let oneTimeTotal = 0;
+                const foundation = form.querySelector('input[name="foundation"]:checked');
+                oneTimeTotal += Number(foundation.dataset.price);
+
+                const advancedFeatures = form.querySelectorAll('input[name="advanced"]:checked');
+                advancedFeatures.forEach(feature => oneTimeTotal += Number(feature.dataset.price));
+
+                const addOns = form.querySelectorAll('input[name="addon"]:checked');
+                addOns.forEach(addOn => oneTimeTotal += Number(addOn.dataset.price));
+
+                const hours = Number(hoursSlider.value);
+                const pricePerHour = Number(hoursSlider.dataset.pricePerHour);
+                const monthlyTotal = hours * pricePerHour;
+
+                oneTimeCostEl.textContent = `$${oneTimeTotal.toLocaleString()}`;
+                monthlyCostEl.textContent = `$${monthlyTotal.toLocaleString()}`;
+                hoursValueEl.textContent = `${hours} hr${hours === 1 ? '' : 's'}`;
             }
-            function generateAndSendQuote(e) {
-                e.preventDefault();
-                const projectType = document.querySelector('input[name="project_type"]:checked').nextElementSibling.textContent;
-                const selectedFeatures = Array.from(document.querySelectorAll('input[name="features"]:checked')).map(el => `   - ${el.parentElement.textContent.replace(el.value, '').trim()}`).join('\n');
-                const selectedAddons = Array.from(document.querySelectorAll('input[name="addons"]:checked')).map(el => `   - ${el.parentElement.textContent.replace(el.value, '').trim()}`).join('\n');
-                const monthlyHours = hoursSlider.value;
-                const finalOneTimeCost = oneTimeCostEl.textContent;
-                const finalMonthlyCost = monthlyCostEl.textContent;
-                const needs = document.getElementById('needs').value.trim();
-                let body = `Hello! Here is the website quote I generated:\n\n`;
-                body += `================================\n`;
-                body += `PROJECT SUMMARY\n`;
-                body += `--------------------------------\n`;
-                body += `Project Foundation: ${projectType}\n`;
-                body += `\nSelected Features:\n${selectedFeatures || '   - None'}\n`;
-                body += `\nAdd-on Services:\n${selectedAddons || '   - None'}\n`;
-                body += `\nMonthly Management: ${monthlyHours} hours/month\n`;
-                if (needs) {
-                    body += `\nProject Description:\n${needs}\n`;
-                }
-                body += `================================\n`;
-                body += `ESTIMATED QUOTE\n`;
-                body += `--------------------------------\n`;
-                body += `One-Time Cost: ${finalOneTimeCost}\n`;
-                body += `Monthly Retainer: ${finalMonthlyCost}\n\n`;
-                body += `================================\n\n`;
-                body += `Please let me know the next steps!\n\n`;
-                body += `Regards,\n[Client Name]`;
-                const subject = "New Website Quote Generated";
-                const mailtoLink = `mailto:${developerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                window.location.href = mailtoLink;
-            }
-            form.addEventListener('input', calculateQuote);
+
+            // --- EVENT LISTENERS ---
             form.addEventListener('change', calculateQuote);
-            form.addEventListener('submit', generateAndSendQuote);
-            calculateQuote();
+            hoursSlider.addEventListener('input', calculateQuote);
+
+            submitButton.addEventListener('click', () => {
+                const subject = "Website Project Quote Inquiry";
+                let body = "Hello,\n\nI've used the quote calculator and I'm interested in the following setup:\n\n";
+
+                const foundation = form.querySelector('input[name="foundation"]:checked');
+                body += `--- WEBSITE FOUNDATION ---\n- ${foundation.nextElementSibling.textContent}: $${Number(foundation.dataset.price).toLocaleString()}\n\n`;
+
+                const advancedFeatures = form.querySelectorAll('input[name="advanced"]:checked');
+                if (advancedFeatures.length > 0) {
+                    body += "--- ADVANCED FEATURES ---\n";
+                    advancedFeatures.forEach(feature => {
+                        body += `- ${feature.nextElementSibling.textContent.trim()}: $${Number(feature.dataset.price).toLocaleString()}\n`;
+                    });
+                    body += "\n";
+                }
+
+                const addOns = form.querySelectorAll('input[name="addon"]:checked');
+                if (addOns.length > 0) {
+                    body += "--- ADD-ON SERVICES ---\n";
+                    addOns.forEach(addOn => {
+                        body += `- ${addOn.nextElementSibling.textContent.trim()}: $${Number(addOn.dataset.price).toLocaleString()}\n`;
+                    });
+                    body += "\n";
+                }
+
+                const hours = hoursSlider.value;
+                body += `--- ONGOING MANAGEMENT ---\n- Monthly Hours: ${hours} ($${Number(hoursSlider.dataset.pricePerHour)}/hr)\n\n`;
+
+                const description = document.getElementById('project-description').value;
+                if (description) {
+                    body += `--- PROJECT DETAILS ---\n${description}\n\n`;
+                }
+
+                body += "--- QUOTE SUMMARY ---\n";
+                body += `One-Time Project Cost: ${oneTimeCostEl.textContent}\n`;
+                body += `Monthly Retainer: ${monthlyCostEl.textContent}\n\n`;
+                body += "I look forward to discussing this further.\n\nBest regards,";
+
+                window.location.href = `mailto:webdevbysai@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            });
+
+            // --- RUN ON LOAD ---
+            populateAddOns();
+            calculateQuote(); // Initial calculation
         });
     </script>
+
 </body>
 
 </html>
